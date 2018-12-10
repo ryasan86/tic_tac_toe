@@ -1,0 +1,21 @@
+.app {
+  display: grid;
+  margin-top: 10%;
+  grid-template-areas:
+    '. title .'
+    '. grid .'
+    '. grid .';
+}
+
+.title {
+  grid-area: title;
+}
+
+.grid {
+  border: blue 2px solid;
+  grid-area: grid;
+}
+
+.cell {
+  border: green 2px solid;
+}
