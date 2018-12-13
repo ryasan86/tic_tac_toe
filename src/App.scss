@@ -1,21 +1,51 @@
-.app {
-  display: grid;
-  margin-top: 10%;
-  grid-template-areas:
-    '. title .'
-    '. grid .'
-    '. grid .';
-}
-
-.title {
-  grid-area: title;
+.title-container {
+  text-align: center;
 }
 
 .grid {
-  border: blue 2px solid;
-  grid-area: grid;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cell {
-  border: green 2px solid;
+  border: black 2px solid;
+  flex: 0 0 32%;
+  height: 150px;
+  cursor: pointer;
+}
+
+.cell-0-0 {
+  border-left: none;
+  border-top: none;
+}
+
+.cell-0-1 {
+  border-top: none;
+}
+
+.cell-0-2 {
+  border-top: none;
+  border-right: none;
+}
+
+.cell-1-0 {
+  border-left: none;
+}
+
+.cell-1-2 {
+  border-right: none;
+}
+
+.cell-2-0 {
+  border-left: none;
+  border-bottom: none;
+}
+
+.cell-2-1 {
+  border-bottom: none;
+}
+.cell-2-2 {
+  border-right: none;
+  border-bottom: none;
 }

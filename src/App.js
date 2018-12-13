@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
+import Grid from './components/Grid';
 import './App.scss';
+
+const Title = () => {
+  return (
+    <div className="title-container">
+      <h2>Tic Tac Toe</h2>
+    </div>
+  );
+};
 
 class App extends Component {
   render() {
     return (
       <div className="app">
-        <div className="title">Tic Tac Toe</div>
-        <div className="grid">
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-          <div className="cell">cell</div>
-        </div>
+        <Title />
+        <Grid />
       </div>
     );
   }
