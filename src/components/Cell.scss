@@ -1,0 +1,69 @@
+.cell {
+  border: black 2px solid;
+  flex: 0 0 32%;
+  height: 150px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.cell-0-0 {
+    border-left: none;
+    border-top: none;
+  }
+
+  &.cell-0-1 {
+    border-top: none;
+  }
+
+  &.cell-0-2 {
+    border-top: none;
+    border-right: none;
+  }
+
+  &.cell-1-0 {
+    border-left: none;
+  }
+
+  &.cell-1-2 {
+    border-right: none;
+  }
+
+  &.cell-2-0 {
+    border-left: none;
+    border-bottom: none;
+  }
+
+  &.cell-2-1 {
+    border-bottom: none;
+  }
+  &.cell-2-2 {
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.cross {
+  background: black;
+  height: 140px;
+  position: relative;
+  width: 20px;
+  transform: rotate(45deg);
+}
+
+.cross:after {
+  background: black;
+  content: '';
+  height: 20px;
+  left: -60px;
+  position: absolute;
+  top: 60px;
+  width: 140px;
+}
+
+.circle {
+  height: 100px;
+  width: 100px;
+  border: 20px solid black;
+  border-radius: 50%;
+}

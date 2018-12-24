@@ -2,24 +2,35 @@ import React, { Component } from 'react';
 import Cell from './Cell';
 
 export default class Grid extends Component {
-  renderCells = () => {
-    const board = [];
+  constructor() {
+    super();
+    this.state = {
+      player: 1,
+      gameOver: false,
+      winner: false
+    };
+  }
+
+  nextPlayer = () => {
+    this.setState({ player: this.state.player === 1 ? 2 : 1 });
+  };
+
+  createBoard = () => {
+    let board = [];
     for (let i = 0; i < 3; i++) {
-      const row = [];
+      let row = [];
       for (let j = 0; j < 3; j++) {
-        row.push(<Cell key={`${i}-${j}`} cell={`${i}-${j}`} />);
+        row.push(<Cell key={`${i}${j}`} coords={`${i}-${j}`} />);
       }
       board.push(row);
     }
+
     return board;
   };
 
-  render() {
-    return (
-      <div className="grid-container">
-        <div />
-        <div className="grid">{this.renderCells()}</div>
-      </div>
-    );
-  }
+  createGrid = () => {};
+
+  render = () => {
+    return <div>{this.createBoard()}</div>;
+  };
 }
