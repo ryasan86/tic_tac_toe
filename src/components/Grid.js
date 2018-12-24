@@ -12,7 +12,13 @@ export default class Grid extends Component {
     };
   }
 
-  nextPlayer = () => {};
+  nextPlayer = () => {
+    this.setState({ player: this.state.player === 1 ? 2 : 1 });
+  };
+
+  // playerMove = (x, y, player) => {
+
+  // }
 
   createBoard = () => {
     const board = [];
@@ -28,16 +34,21 @@ export default class Grid extends Component {
 
   renderCells = () => {
     return this.state.board.map((row, x) => {
-      return row.map((_, y) => <Cell key={`${x}-${y}`} cell={`${x}-${y}`} />);
+      return row.map((_, y) => {
+        const coords = `${x}-${y}`;
+        return (
+          <Cell
+            key={coords}
+            cell={coords}
+            player={this.state.player}
+            nextPlayer={this.nextPlayer}
+          />
+        );
+      });
     });
   };
 
   render() {
-    return (
-      <div className="grid-container">
-        <div className="grid">{this.renderCells()}</div>
-        <button onClick={() => console.log(this.state)}>test</button>
-      </div>
-    );
+    return <div className="grid">{this.renderCells()}</div>;
   }
 }
