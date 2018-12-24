@@ -16,9 +16,9 @@ export default class Grid extends Component {
     this.setState({ player: this.state.player === 1 ? 2 : 1 });
   };
 
-  // playerMove = (x, y, player) => {
-
-  // }
+  handleClick = cell => {
+    console.log(cell);
+  };
 
   createBoard = () => {
     const board = [];
@@ -41,7 +41,7 @@ export default class Grid extends Component {
             key={coords}
             cell={coords}
             player={this.state.player}
-            nextPlayer={this.nextPlayer}
+            handleClick={this.handleClick}
           />
         );
       });
