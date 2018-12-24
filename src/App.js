@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Grid from './components/Grid';
+import Grid from './Grid';
 import './App.scss';
 
 const Title = () => {
@@ -11,14 +11,14 @@ const Title = () => {
 };
 
 class App extends Component {
-  render() {
+  render = () => {
     return (
       <div className="app">
         <Title />
         <Grid />
       </div>
     );
-  }
+  };
 }
 
 export default App;

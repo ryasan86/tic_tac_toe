@@ -1,26 +1,6 @@
 import React, { Component } from 'react';
 import Cell from './Cell';
-
-class Board {
-  constructor() {
-    this.board = [];
-    for (let i = 0; i < 3; i++) {
-      const row = [];
-      for (let j = 0; j < 3; j++) {
-        row.push(0);
-      }
-      this.board.push(row);
-    }
-  }
-
-  movePlayer = (x, y, player) => {
-    this.board[x][y] = player;
-  };
-
-  checkCell = (x, y) => {
-    return this.board[x][y];
-  };
-}
+import Board from './Board';
 
 export default class Grid extends Component {
   constructor() {
@@ -62,7 +42,7 @@ export default class Grid extends Component {
     });
   };
 
-  render() {
+  render = () => {
     return <div className="grid">{this.renderCells()}</div>;
-  }
+  };
 }
