@@ -30,7 +30,7 @@ export default class Cell extends Component {
     const { cell } = this.props;
     return (
       <button
-        className={`cell cell-${cell}`}
+        className={`cell cell-${cell} ${this.state.clicked ? 'clicked' : ''}`}
         onClick={() => this.handleClick(cell)}
         ref={this.props.cell}
       >

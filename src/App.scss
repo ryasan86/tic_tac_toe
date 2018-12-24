@@ -20,6 +20,13 @@ body {
   flex: 0 0 32%;
   height: 150px;
   cursor: pointer;
+  &:hover {
+    background-color: darken($background_color, 8%);
+  }
+
+  &.clicked {
+    background-color: $background_color;
+  }
 }
 
 .cell-0-0 {
