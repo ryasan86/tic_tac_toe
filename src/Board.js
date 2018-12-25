@@ -33,8 +33,9 @@ export default class Board {
     }, []);
   };
 
-  // // TODO: check rows, columns, diagonals
-  // checkWin = () => {
-  //   console.log('TODO: check win');
-  // };
+  // TODO: check rows, columns, diagonals
+  checkWin = () => {
+    const { board } = this;
+    console.log(board);
+  };
 }

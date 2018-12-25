@@ -21,16 +21,15 @@ export default class Grid extends Component {
 
   // player move
   playerMove = () => {
-    this.setState({ player: this.nextPlayer() }, this.aiMove);
+    this.setState({ player: this.nextPlayer() }, () => setTimeout(this.aiMove, 200)); // time between player and ai move
   };
 
   // ai move
   aiMove = () => {
     const openCells = this.board.getOpenCells();
-    if (openCells[0]) {
-      const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
-      this.board.movePlayer(x, y, this.state.player, this.forceUpdate.bind(this)); // board rerender after ai move
-    }
+    const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
+    this.board.movePlayer(x, y, this.state.player, this.forceUpdate.bind(this));
+    this.setState({ player: this.nextPlayer() });
   };
 
   // set coordinates on board to player making move
@@ -39,26 +38,27 @@ export default class Grid extends Component {
     this.board.movePlayer(x, y, this.state.player, this.playerMove);
   };
 
-    // render x or o based on who's turn it is
-    renderMove = (x, y) => {
-      const { getCell } = this.board;
-      return <div className={getCell(x, y) === 1 ? 'player1' : getCell(x, y) === 2 ? 'player2' : ''} />;
-    };
+  // render x or o based on who's turn it is
+  renderMove = (x, y) => {
+    const { getCell } = this.board;
+    return <div className={ getCell(x, y) === 1 ? 'player1' : getCell(x, y) === 2 ? 'player2' : '' } />;
+  };
 
   // render cells based on board layout
   renderCells = () => {
-    const { board } = this.board;
-    return board.map((row, x) => {
-      return row.map((_, y) => {
+    return this.board.board.map((row, x) => {
+      return row.map((cell, y) => {
         const coords = `${x}-${y}`;
-        const disabled = board[x][y] > 0;  // disable clicking if move exists on cell
+        const disabled = cell > 0; // disable clicking if move exists on cell
         return (
           <Cell
             key={coords}
             cell={coords}
             handleClick={this.handleClick}
             disabled={disabled}
-          >{this.renderMove(x, y)}</Cell>
+          >
+            {this.renderMove(x, y)}
+          </Cell>
         );
       });
     });
