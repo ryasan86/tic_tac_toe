@@ -5,34 +5,35 @@ const parseIntCoords = cell => {
 };
 
 export default class Cell extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      clicked: false
+      disabled: false
     };
   }
 
+  // disable clicking on cell after player has moved
   handleClick = cell => {
-    this.refs[this.props.cell].setAttribute('disabled', 'disabled');
-    this.setState({ clicked: true }, () => {
+    this.setState({ disabled: true }, () => {
       const coords = parseIntCoords(cell);
       this.props.handleClick(coords);
     });
   };
 
+  // render x or o based on who's turn it is
   renderMove = () => {
     const [x, y] = parseIntCoords(this.props.cell);
     const { getCell } = this.props.board;
-    return getCell(x, y) === 1 ? 'x' : getCell(x, y) === 2 ? 'o' : '';
+    return <div className={getCell(x, y) === 1 ? 'player1' : getCell(x, y) === 2 ? 'player2' : ''} />;
   };
 
   render = () => {
     const { cell } = this.props;
     return (
       <button
-        className={`cell cell-${cell} ${this.state.clicked ? 'clicked' : ''}`}
-        onClick={() => this.handleClick(cell)}
-        ref={this.props.cell}
+        className={`cell cell-${cell} ${this.state.disabled ? 'disabled' : ''}`}
+        onClick={() =>  this.handleClick(cell)}
+        disabled={this.state.disabled}
       >
         {this.renderMove()}
       </button>

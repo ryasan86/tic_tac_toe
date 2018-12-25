@@ -11,6 +11,10 @@ const Title = () => {
 };
 
 class App extends Component {
+  componentDidMount() {
+    document.title = 'Tic Tac Toe!';
+  }
+
   render = () => {
     return (
       <div className="app">
