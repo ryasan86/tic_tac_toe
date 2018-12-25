@@ -13,7 +13,6 @@ export default class Board {
   // move playing user/ai
   movePlayer = (x, y, player, cb) => {
     this.board[x][y] = player;
-    console.log(this.board);
     typeof cb === 'function' && cb();
   };
 
@@ -22,7 +21,7 @@ export default class Board {
     return this.board[x][y];
   };
 
-  // array of playable cells left
+  // array of available playable cells
   getOpenCells = () => {
     return this.board.reduce((freeCells, row, rowIdx) => {
       for (let colIdx = 0; colIdx < row.length; colIdx++) {

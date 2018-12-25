@@ -20,13 +20,6 @@ export default class Cell extends Component {
     });
   };
 
-  // render x or o based on who's turn it is
-  renderMove = () => {
-    const [x, y] = parseIntCoords(this.props.cell);
-    const { getCell } = this.props.board;
-    return <div className={getCell(x, y) === 1 ? 'player1' : getCell(x, y) === 2 ? 'player2' : ''} />;
-  };
-
   render = () => {
     const { cell } = this.props;
     return (
@@ -35,7 +28,7 @@ export default class Cell extends Component {
         onClick={() =>  this.handleClick(cell)}
         disabled={this.state.disabled}
       >
-        {this.renderMove()}
+        {this.props.children}
       </button>
     );
   };
