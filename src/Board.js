@@ -10,7 +10,7 @@ export default class Board {
     }
   }
 
-  // move playing user/ai
+  // move playing player/ai
   movePlayer = (x, y, player, cb) => {
     this.board[x][y] = player;
     typeof cb === 'function' && cb();

@@ -13,19 +13,27 @@ export default class Grid extends Component {
 
     this.board = new Board();
   }
-
+  
+  // switch players
   nextPlayer = () => {
     return this.state.player === 1 ? 2 : 1;
   };
 
+  // player move
   playerMove = () => {
-    this.setState({ player: this.nextPlayer() }, () => {
-      const openCells = this.board.getOpenCells();
-      const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
-      this.board.movePlayer(x, y, this.state.player);
-      this.forceUpdate();
-    });
+    this.setState({ player: this.nextPlayer() }, this.aiMove);
   };
+
+  // ai move after player makes a move
+  aiMove = () => {
+    const openCells = this.board.getOpenCells();
+    // make sure there are open cells before placing a move
+    if (openCells[0]) {
+      const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
+      this.board.movePlayer(x, y, this.state.player, this.forceUpdate.bind(this)); // board rerender after ai move
+
+    }
+  }
 
   // set coordinates on board to player making move
   handleClick = cell => {
