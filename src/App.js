@@ -5,7 +5,7 @@ import './App.scss';
 const Title = () => {
   return (
     <div className="title-container">
-      <h2>Tic Tac Toe</h2>
+      <h2>Tic Tac Toe!</h2>
     </div>
   );
 };

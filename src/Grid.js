@@ -14,16 +14,21 @@ export default class Grid extends Component {
     this.board = new Board();
   }
 
-  // next player turn
+  // next player
   nextPlayer = () => {
-    this.setState({ player: this.state.player === 1 ? 2 : 1 });
+    return this.state.player === 1 ? 2 : 1;
+  };
+
+  // player turn
+  playerMove = () => {
+    this.setState({ player: this.nextPlayer() });
   };
 
   // set coordinates on board to player making move
   handleClick = cell => {
     const [x, y] = cell;
-    this.board.movePlayer(x, y, this.state.player);
-    this.nextPlayer();
+    this.board.movePlayer(x, y, this.state.player, this.aiMove);
+    this.playerMove();
   };
 
   // render cells based on board layout

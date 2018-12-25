@@ -10,11 +10,11 @@ export default class Board {
     }
   }
 
-  // move playing user
-  movePlayer = (x, y, player) => {
+  // move playing user/ai
+  movePlayer = (x, y, player, cb) => {
     this.board[x][y] = player;
-    this.checkWin();
-    console.log(this.getOpenCells());
+    console.log(this.board);
+    typeof cb === 'function' && cb();
   };
 
   // determine which cell belongs to player
@@ -34,10 +34,8 @@ export default class Board {
     }, []);
   };
 
-  moveAi = () => {};
-
-  // check rows, columns, diagonals
-  checkWin = () => {
-    console.log('TODO: check win');
-  };
+  // // TODO: check rows, columns, diagonals
+  // checkWin = () => {
+  //   console.log('TODO: check win');
+  // };
 }
