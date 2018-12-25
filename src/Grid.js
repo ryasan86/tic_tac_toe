@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Cell from './Cell';
 import Board from './Board';
+import Cell from './Cell';
 
 export default class Grid extends Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class Grid extends Component {
 
     this.board = new Board();
   }
-  
+
   // switch players
   nextPlayer = () => {
     return this.state.player === 1 ? 2 : 1;
@@ -24,16 +24,14 @@ export default class Grid extends Component {
     this.setState({ player: this.nextPlayer() }, this.aiMove);
   };
 
-  // ai move after player makes a move
+  // ai move
   aiMove = () => {
     const openCells = this.board.getOpenCells();
-    // make sure there are open cells before placing a move
     if (openCells[0]) {
       const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
       this.board.movePlayer(x, y, this.state.player, this.forceUpdate.bind(this)); // board rerender after ai move
-
     }
-  }
+  };
 
   // set coordinates on board to player making move
   handleClick = cell => {
@@ -53,11 +51,13 @@ export default class Grid extends Component {
     return board.map((row, x) => {
       return row.map((_, y) => {
         const coords = `${x}-${y}`;
+        const disabled = board[x][y] > 0;  // disable clicking if move exists on cell
         return (
           <Cell
             key={coords}
             cell={coords}
             handleClick={this.handleClick}
+            disabled={disabled}
           >{this.renderMove(x, y)}</Cell>
         );
       });

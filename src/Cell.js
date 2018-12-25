@@ -5,13 +5,6 @@ const parseIntCoords = cell => {
 };
 
 export default class Cell extends Component {
-  constructor() {
-    super();
-    this.state = {
-      disabled: false
-    };
-  }
-
   // disable clicking on cell after player has moved
   handleClick = cell => {
     this.setState({ disabled: true }, () => {
@@ -21,12 +14,12 @@ export default class Cell extends Component {
   };
 
   render = () => {
-    const { cell } = this.props;
+    const { cell, disabled } = this.props;
     return (
       <button
-        className={`cell cell-${cell} ${this.state.disabled ? 'disabled' : ''}`}
-        onClick={() =>  this.handleClick(cell)}
-        disabled={this.state.disabled}
+        className={`cell cell-${cell} ${this.props.disabled ? 'disabled' : ''}`}
+        onClick={() => this.handleClick(cell)}
+        disabled={disabled}
       >
         {this.props.children}
       </button>
