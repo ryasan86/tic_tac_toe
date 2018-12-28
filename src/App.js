@@ -46,6 +46,7 @@ export default class App extends Component {
     }
   };
 
+  // check if any playable cells are left on board
   boardIsFilled = () => {
     return !this.board.getOpenCells()[0];
   };
