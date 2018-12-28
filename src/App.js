@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
 import Cell from './Cell';
+import Announcement from './Announcement';
 import './App.scss';
 
 export default class App extends Component {
@@ -75,7 +76,6 @@ export default class App extends Component {
     return <div className={this.addClassName(x, y)} />;
   };
 
-
   // show cells based on board layout
   renderGrid = () => {
     return this.board.board.map((row, x) => {
@@ -96,18 +96,16 @@ export default class App extends Component {
     });
   };
 
+  // show announcement when game ends
   renderAnnouncement = () => {
-    const { winner } = this.state;
-    const announcement = !winner && this.boardIsFilled() ? `It's a tie!` : `Player ${winner} has won!`;
-    const message = (
-      <div className="backdrop">
-        <div className="modal-wrapper">
-          {announcement} <button onClick={this.reset}>reset</button>
-        </div>
-      </div>
+    const announcement = (
+      <Announcement
+        winner={this.state.winner}
+        boardIsFilled={this.boardIsFilled}
+        reset={this.reset}
+      />
     );
-
-    return this.state.gameOver ? message : '';
+    return this.state.gameOver ? announcement : '';
   };
 
   render = () => {

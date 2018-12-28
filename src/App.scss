@@ -19,7 +19,7 @@ body {
 }
 
 .cell {
-  border: black 2px solid;
+  border: black 10px solid;
   background-color: $background_color;
   flex: 0 0 32%;
   height: 150px;
@@ -65,12 +65,14 @@ body {
 
 .player1 {
   background: black;
+  border-radius: 20px;
   height: 120px;
   position: relative;
   width: 20px;
   transform: rotate(45deg);
   &:after {
     background: black;
+    border-radius: 20px;
     content: '';
     height: 20px;
     left: -50px;
@@ -97,16 +99,40 @@ body {
   background: transparentize(#000, 0.5);
 }
 
-.modal-wrapper {
-  width: 550px;
-  height: 200px;
+.modal-container {
+  width: 200px;
+  height: 75px;
   position: absolute;
-  top: 42%;
-  left: 50%;
+  top: 45%;
+  left: 65%;
   padding: 1% 2% 2% 2%;
   margin-top: -165px;
   margin-left: -275px;
   z-index: 9999;
   border-radius: 0.5rem;
   background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.message-container {
+  font-size: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  button {
+    font-size: 20px;
+    background-color: #48c9b0;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    width: 75px;
+    height: 30px;
+    text-shadow: 1px 1px 2px black;
+    &:hover {
+      background-color: darken(#48c9b0, 20%);
+    }
+  }
 }
