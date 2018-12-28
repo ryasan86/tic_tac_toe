@@ -58,6 +58,11 @@ export default class App extends Component {
     }
   };
 
+  reset = () => {
+    this.board = new Board();
+    this.setState({ player: 1, gameOver: false, winner: 0 });
+  };
+
   // renders x or o
   addClassName = (x, y) => {
     const { getCell } = this.board;
@@ -102,11 +107,6 @@ export default class App extends Component {
     );
 
     return this.state.gameOver ? message : '';
-  };
-
-  reset = () => {
-    this.board = new Board();
-    this.setState({ player: 1, gameOver: false, winner: 0 });
   };
 
   render = () => {
