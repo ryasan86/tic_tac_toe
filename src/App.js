@@ -8,15 +8,11 @@ export default class App extends Component {
     super(props);
     this.state = {
       player: 1,
-      gameOver: false
+      gameOver: false,
+      winner: 0
     };
     this.board = new Board();
   }
-
-  // check winner
-  checkWinner = () => {
-    if (this.board.findWinner() > 0) this.setState({ gameOver: true });
-  };
 
   // switch players
   nextPlayer = () => {
@@ -26,8 +22,7 @@ export default class App extends Component {
   // set coordinates on board to player making move
   handleClick = cell => {
     const [x, y] = cell;
-    !this.state.gameOver &&
-      this.board.movePlayer(x, y, this.state.player, this.playerMove);
+    !this.state.gameOver && this.board.movePlayer(x, y, this.state.player, this.playerMove);
   };
 
   // player move then ai move
@@ -43,15 +38,27 @@ export default class App extends Component {
     const openCells = this.board.getOpenCells();
     if (openCells.length) {
       const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
-      !this.state.gameOver &&
-        this.board.movePlayer(x, y, this.state.player, () => {
+      !this.state.gameOver && this.board.movePlayer(x, y, this.state.player, () => {
           this.forceUpdate();
           this.checkWinner();
+          this.setState({ player: this.nextPlayer() });
         });
-      this.setState({ player: this.nextPlayer() });
     }
   };
 
+  boardIsFilled = () => {
+    return !this.board.getOpenCells()[0];
+  };
+
+  // check winner
+  checkWinner = () => {
+    const { findWinner } = this.board;
+    if (findWinner() > 0 || this.boardIsFilled()) {
+      this.setState({ gameOver: true, winner: findWinner() });
+    }
+  };
+
+  // renders x or o
   addClassName = (x, y) => {
     const { getCell } = this.board;
     return getCell(x, y) === 1 ? 'player1' : getCell(x, y) === 2 ? 'player2' : '';
@@ -61,6 +68,7 @@ export default class App extends Component {
   renderMove = (x, y) => {
     return <div className={this.addClassName(x, y)} />;
   };
+
 
   // show cells based on board layout
   renderGrid = () => {
@@ -82,22 +90,24 @@ export default class App extends Component {
     });
   };
 
-
   renderAnnouncement = () => {
-    const announceWinner = (
+    const { winner } = this.state;
+    const announcement = !winner && this.boardIsFilled() ? `It's a tie!` : `Player ${winner} has won!`;
+    const message = (
       <div className="backdrop">
         <div className="modal-wrapper">
-           player {this.state.player} has won! <button onClick={this.reset}>reset</button>
+          {announcement} <button onClick={this.reset}>reset</button>
         </div>
       </div>
     );
-    return this.state.gameOver ? announceWinner : '';
+
+    return this.state.gameOver ? message : '';
   };
 
   reset = () => {
     this.board = new Board();
-    this.setState({player: 1, gameOver: false})
-  }
+    this.setState({ player: 1, gameOver: false, winner: 0 });
+  };
 
   render = () => {
     return (
@@ -106,7 +116,7 @@ export default class App extends Component {
         <div className="title-container">
           <h2>Tic Tac Toe!</h2>
         </div>
-        <div className="grid">{this.renderGrid()}</div>;
+        <div className="grid">{this.renderGrid()}</div>
       </div>
     );
   };
