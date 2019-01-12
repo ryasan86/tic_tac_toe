@@ -1,4 +1,4 @@
-export default class Board {
+class Board {
   constructor() {
     this.board = [];
     for (let i = 0; i < 3; i++) {
@@ -75,3 +75,5 @@ export default class Board {
       : checkMatrix([diags.left, diags.right]);
   };
 }
+
+export default Board;

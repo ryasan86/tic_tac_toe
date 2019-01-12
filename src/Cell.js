@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Cell extends Component {
+class Cell extends Component {
   // disable clicking on cell after player has moved
   handleClick = cell => {
     this.setState({ disabled: true }, () => {
@@ -22,3 +22,5 @@ export default class Cell extends Component {
     );
   };
 }
+
+export default Cell;

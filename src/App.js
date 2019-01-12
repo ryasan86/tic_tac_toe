@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Board from './Board';
 import Cell from './Cell';
 import Announcement from './Announcement';
+import Title from './Title';
+import Icon from './Icon';
 import './App.scss';
 
 export default class App extends Component {
@@ -111,10 +113,9 @@ export default class App extends Component {
   render = () => {
     return (
       <div className="app">
+        <Icon />
         {this.renderAnnouncement()}
-        <div className="title-container">
-          <h2>Tic Tac Toe!</h2>
-        </div>
+        <Title />
         <div className="grid">{this.renderGrid()}</div>
       </div>
     );
