@@ -3,7 +3,7 @@ import Board from './Board';
 import Cell from './Cell';
 import Announcement from './Announcement';
 import Title from './Title';
-import Icon from './Icon';
+import AppBar from './AppBar';
 import './App.scss';
 
 export default class App extends Component {
@@ -113,7 +113,7 @@ export default class App extends Component {
   render = () => {
     return (
       <div className="app">
-        <Icon />
+        <AppBar />
         {this.renderAnnouncement()}
         <Title />
         <div className="grid">{this.renderGrid()}</div>
