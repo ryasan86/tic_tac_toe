@@ -2,6 +2,7 @@
 
 $dark: #2d2d2d;
 $light: #f1f1f1;
+$cell_length_width: 150px;
 
 * {
   box-sizing: border-box;
@@ -24,6 +25,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .app-bar {
@@ -52,20 +54,23 @@ body {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 200px);
+  grid-template-columns: repeat(3, $cell_length_width);
   @media only screen and (max-width: 450px) {
-    grid-template-columns: repeat(3, 100px);
+    grid-template-columns: repeat(3, calc(#{$cell_length_width} - 50px));
   }
   .cell {
     border: $light 3px solid;
     background-color: transparent;
     flex: 0 0 32%;
-    height: 150px;
+    height: $cell_length_width;
     display: flex;
     justify-content: center;
     outline: none;
     position: relative;
     cursor: pointer;
+    @media only screen and (max-width: 450px) {
+      height: calc(#{$cell_length_width} - 50px);
+    }
     &.cell-0-0 {
       border-left: none;
       border-top: none;
@@ -159,15 +164,14 @@ body {
   height: 100%;
   z-index: 9998;
   background: transparentize(#000, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .modal-container {
     width: 250px;
     height: 125px;
-    position: absolute;
-    top: 45%;
-    left: 65%;
+    position: relative;
     padding: 1% 2% 2% 2%;
-    margin-top: -165px;
-    margin-left: -275px;
     z-index: 9999;
     border-radius: 0.5rem;
     background-color: $light;
