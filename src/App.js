@@ -89,8 +89,7 @@ export default class App extends Component {
             cell={coords}
             disabled={disabled}
             movePlayer={this.movePlayer}
-            player={this.state.player}
-            >
+            player={this.state.player}>
             {this.renderMove(x, y)}
           </Cell>
         );
