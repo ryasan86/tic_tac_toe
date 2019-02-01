@@ -65,6 +65,7 @@ body {
     height: $cell_length_width;
     display: flex;
     justify-content: center;
+    align-items: center;
     outline: none;
     position: relative;
     cursor: pointer;
@@ -135,6 +136,7 @@ body {
       width: 15px;
       transform: rotate(45deg);
       transition: transform 0.5s;
+      position: absolute;
       &::after {
         background: $light;
         content: '';
@@ -144,6 +146,9 @@ body {
         top: 50px;
         width: 120px;
       }
+      @media only screen and (max-width: 450px) {
+        transform: scale(0.6) rotate(45deg);
+      }
     }
 
     .player2 {
@@ -152,6 +157,9 @@ body {
       height: 80px;
       width: 80px;
       transition: all 0.5s;
+      @media only screen and (max-width: 450px) {
+        transform: scale(0.6);
+      }
     }
   }
 }
