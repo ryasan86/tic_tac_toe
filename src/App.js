@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Board from './Board';
 import Cell from './Cell';
 import Announcement from './Announcement';
@@ -7,8 +7,8 @@ import AppBar from './AppBar';
 import './App.scss';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       player: 1,
       gameOver: false,
@@ -23,7 +23,7 @@ export default class App extends Component {
   };
 
   // set coordinates on board to player making move
-  handleClick = cell => {
+  movePlayer = cell => {
     const [x, y] = cell;
     !this.state.gameOver && this.board.movePlayer(x, y, this.state.player, this.playerMove);
   };
@@ -42,7 +42,6 @@ export default class App extends Component {
     if (openCells.length) {
       const [x, y] = openCells[Math.floor(Math.random() * openCells.length)];
       !this.state.gameOver && this.board.movePlayer(x, y, this.state.player, () => {
-          this.forceUpdate();
           this.checkWinner();
           this.setState({ player: this.nextPlayer() });
         });
@@ -88,9 +87,10 @@ export default class App extends Component {
           <Cell
             key={coords}
             cell={coords}
-            handleClick={this.handleClick}
             disabled={disabled}
-          >
+            movePlayer={this.movePlayer}
+            player={this.state.player}
+            >
             {this.renderMove(x, y)}
           </Cell>
         );
@@ -104,20 +104,19 @@ export default class App extends Component {
       <Announcement
         winner={this.state.winner}
         boardIsFilled={this.boardIsFilled}
-        reset={this.reset}
-      />
+        reset={this.reset} />
     );
     return this.state.gameOver ? announcement : '';
   };
 
   render = () => {
     return (
-      <div className="app">
+      <Fragment>
         <AppBar />
         {this.renderAnnouncement()}
         <Title />
         <div className="grid">{this.renderGrid()}</div>
-      </div>
+      </Fragment>
     );
   };
 }

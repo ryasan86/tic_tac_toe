@@ -1,5 +1,5 @@
 import React from 'react';
-import GH_ICON from './github.svg';
+import GH_ICON from './images/github.svg';
 
 const AppBar = () => (
   <div className="app-bar">
